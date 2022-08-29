@@ -10,22 +10,32 @@ import UIKit
 
 class DetailCoordinator: Coordinator {
     var navigationController: UINavigationController
+    private var viewController: DetailViewController?
+    private let statementID: String
 
-    init(navigationController: UINavigationController) {
+    init(statementID: String, navigationController: UINavigationController) {
+        self.statementID = statementID
         self.navigationController = navigationController
     }
 
     func start() {
         let detailViewController = makeDetailViewController()
+        self.viewController = detailViewController
         navigationController.pushViewController(detailViewController, animated: true)
     }
 
     private func makeDetailViewController() -> DetailViewController {
+        let model = DetailModel(statementID: statementID)
+        let service = DetailService()
         let storyboard = UIStoryboard.init(name: "DetailStoryboard", bundle: nil)
         guard let viewController = storyboard.instantiateViewController(
             withIdentifier: "DetailViewController") as? DetailViewController else {
             fatalError()
         }
+
+        model.service = service
+        model.delegate = viewController
+        viewController.model = model
 
         return viewController
     }
