@@ -49,8 +49,14 @@ extension Statement {
         } else if from != nil {
             return "Emissor"
         }
-        return "Minha Conta"
+        return ""
     }
+
+//    var typeBank: String {
+//        if let bankName = bankName {
+//            return bankName
+//        
+//    }
 
 }
 
