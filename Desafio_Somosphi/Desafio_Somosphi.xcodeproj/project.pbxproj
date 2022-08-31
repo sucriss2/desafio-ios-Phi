@@ -95,10 +95,10 @@
 		8C71BD7228A5494D0065832C /* Networks */ = {
 			isa = PBXGroup;
 			children = (
-				8C71BD7328A549830065832C /* Authentication.swift */,
-				8C71BD7B28A558CD0065832C /* Network.swift */,
 				8C71BD7928A5585A0065832C /* Request.swift */,
+				8C71BD7328A549830065832C /* Authentication.swift */,
 				8C71BD7728A552660065832C /* Config.swift */,
+				8C71BD7B28A558CD0065832C /* Network.swift */,
 			);
 			name = Networks;
 			sourceTree = "<group>";

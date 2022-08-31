@@ -32,7 +32,6 @@ class AmountService {
                 onComplete(amount ?? Amount(amount: 0))
             }
         }
-
     }
 
 }

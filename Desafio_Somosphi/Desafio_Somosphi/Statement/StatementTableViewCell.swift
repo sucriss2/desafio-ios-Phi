@@ -23,7 +23,6 @@ class StatementTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
@@ -40,6 +39,6 @@ class StatementTableViewCell: UITableViewCell {
             pixImage.isHidden = false
             contentView.backgroundColor = Color.highlight.uiColor
         }
-
     }
+
 }

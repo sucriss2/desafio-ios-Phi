@@ -36,4 +36,3 @@ class DetailModel {
 
 }
 
-// https://desafio-mobile-bff.herokuapp.com/myStatement/detail/49E27207-F3A7-4264-B021-0188690F7D43

@@ -17,4 +17,5 @@ enum Color: String {
     var uiColor: UIColor? {
         return UIColor(named: self.rawValue)
     }
+
 }

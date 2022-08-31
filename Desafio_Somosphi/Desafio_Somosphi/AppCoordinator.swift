@@ -24,7 +24,6 @@ class AppCoordinator: Coordinator {
         window?.makeKeyAndVisible()
 
         showStatementCoordinator(navigationController)
-//        showDetailCoordinator(navigationController)
     }
 
     fileprivate func showStatementCoordinator(_ navigationController: UINavigationController) {
@@ -32,13 +31,5 @@ class AppCoordinator: Coordinator {
         statementCoordinator.start()
         childCoordinator = statementCoordinator
     }
-
-//    fileprivate func showDetailCoordinator(_ navigationController: UINavigationController) {
-//        let detailCoordinator = DetailCoordinator(
-//            statementID: "0B5BFD44-0DF1-4005-A7CF-66C9C0438380",
-//            navigationController: navigationController)
-//        detailCoordinator.start()
-//        childCoordinator = detailCoordinator
-//    }
 
 }
