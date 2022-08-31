@@ -17,6 +17,7 @@ struct Statement: Codable {
     var from: String?
     var bankName: String?
     var authentication: String?
+    var myBank = "Seu banco"
 
     enum CodingKeys: String, CodingKey {
         case createdAt, amount, description, tType, bankName, from, authentication
@@ -51,12 +52,6 @@ extension Statement {
         }
         return ""
     }
-
-//    var typeBank: String {
-//        if let bankName = bankName {
-//            return bankName
-//        
-//    }
 
 }
 

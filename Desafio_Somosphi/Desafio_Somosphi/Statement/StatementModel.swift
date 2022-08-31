@@ -14,9 +14,7 @@ protocol StatementModelDelegate: AnyObject {
 }
 
 class StatementModel {
-
     // MARK: - Internal Properties
-
     weak var delegate: StatementModelDelegate?
     var service: AmountService?
     var serviceStatement: StatementService?
@@ -43,7 +41,6 @@ class StatementModel {
     }
 
     // MARK: - Private properties
-
     private var amount: Int = 0
     private var page: Int = 0
     private var hasMorePages = true

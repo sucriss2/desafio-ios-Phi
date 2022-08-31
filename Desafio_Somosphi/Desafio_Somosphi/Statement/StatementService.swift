@@ -35,7 +35,6 @@ class StatementService {
                 onComplete(items ?? Statements(items: []))
             }
         }
-
     }
 
 }

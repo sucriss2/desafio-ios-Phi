@@ -22,9 +22,9 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        erase()
         model?.service = DetailService()
         model?.loadDetail()
-
     }
 
     @IBAction func share(_ sender: Any) {
@@ -32,7 +32,17 @@ class DetailViewController: UIViewController {
             showShare(sender: sender)
         }
     }
-    // 
+
+    func erase() {
+        descriptionLabel.text = ""
+        targetLabel.text = ""
+        bankLabel.text = ""
+        authenticationLabel.text = ""
+        valueLabel.text = ""
+        dateHourLabel.text = ""
+    }
+
+    // Transformando a view wm imagem
     func takeDetailStatement() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(view.frame.size, view.isOpaque, 1.0)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -48,9 +58,7 @@ class DetailViewController: UIViewController {
             return
         }
 
-        let fileNameShot = "Meu último compartilhamento"
-
-        guard let url = storeImagePhone(image: image, imageName: fileNameShot) else {
+        guard let url = storeImagePhone(image: image) else {
             showErrorShare()
             return
         }
@@ -61,11 +69,11 @@ class DetailViewController: UIViewController {
         self.present(activityView, animated: true, completion: nil)
 
     }
-
     // O método salvar imagem --- Onde a imagem é armazenada
-    private func storeImagePhone(image: UIImage, imageName: String) -> URL? {
-        let imagePath: String = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(imageName).png"
-        let imageUrl: URL = URL(fileURLWithPath: imagePath)
+    private func storeImagePhone(image: UIImage) -> URL? {
+        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let imagePath = dirPath + "snapshot.png"
+        let imageUrl = URL(fileURLWithPath: imagePath)
 
         do {
             try image.pngData()?.write(to: imageUrl)
@@ -74,7 +82,6 @@ class DetailViewController: UIViewController {
             return nil
         }
     }
-
     // O método de mensagem de erro.
     private func showErrorShare() {
         DispatchQueue.main.async {
@@ -87,10 +94,10 @@ class DetailViewController: UIViewController {
         }
     }
 
-    private func abc() {
+    private func prepareDetail() {
         descriptionLabel.text = model?.statement?.description
         targetLabel.text = model?.statement?.destinationName
-        bankLabel.text = model?.statement?.bankName ?? "Sua Conta"
+        bankLabel.text = model?.statement?.bankName ?? model?.statement?.myBank
         authenticationLabel.text = model?.statement?.authentication
         descriptionTargetLabel.text = model?.statement?.typeTarget
         valueLabel.text = Formatter.formatCurrency(value: model?.statement?.amount ?? 0)
@@ -106,7 +113,7 @@ class DetailViewController: UIViewController {
 extension DetailViewController: DetailModelDelegate {
     func didUpShowDetail() {
         DispatchQueue.main.async { [weak self] in
-            self?.abc()
+            self?.prepareDetail()
         }
     }
 

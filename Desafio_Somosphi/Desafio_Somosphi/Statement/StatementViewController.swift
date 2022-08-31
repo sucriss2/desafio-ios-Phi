@@ -50,6 +50,7 @@ class StatementViewController: UIViewController {
             showAmountButton?.setImage(Icon.eye.sfIcon, for: .normal)
         }
     }
+
 }
 
 extension StatementViewController: UITableViewDataSource {
@@ -79,6 +80,7 @@ extension StatementViewController: UITableViewDataSource {
         }
 
         let statement = statements[indexPath.row]
+        cell.selectionStyle = .none
         cell.prepare(model: statement)
         return cell
     }
@@ -98,7 +100,6 @@ extension StatementViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let statement = statements[indexPath.row]
         delegate?.showDetailStatement(statementID: statement.statementID)
-
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
