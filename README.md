@@ -1,3 +1,8 @@
+# Preview do desafio
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/100352837/187778785-0dbfea43-7e92-42d2-93c4-571acabfe864.gif)
+---
+
 # Desafio iOS - Phi
 ---
 ![Banner Phi](assets/20200826084504887_picture.jpg)
@@ -98,3 +103,6 @@ Não tente fazer o PUSH diretamente para ESTE repositório!
 ## Copyright
 
 Copyright ícones: [zondicons](https://www.iconfinder.com/iconsets/zondicons)
+
+
+
