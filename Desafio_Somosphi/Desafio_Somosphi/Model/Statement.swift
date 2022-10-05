@@ -61,10 +61,11 @@ extension Statement {
         createdAt: String = "2020-10-22T03:00:00Z",
         statementID: String = "E79E0C9A-46AE-4DBA-82F5-D0BACC53F6CF",
         amount: Int = 1807,
-        target: String = "David Bond",
+        target: String? = "David Bond",
         description: String = "Transferência realizada",
         authentication: String = "",
-        tType: String = "TRANSFEROUT"
+        tType: String = "TRANSFEROUT",
+        from: String? = nil
     ) -> Statement {
         Statement(
             createdAt: createdAt,
@@ -73,6 +74,7 @@ extension Statement {
             target: target,
             description: description,
             tType: tType,
+            from: from,
             authentication: authentication
         )
 

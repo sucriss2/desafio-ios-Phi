@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C0FB95E28EC645900F530CA /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0FB95D28EC645900F530CA /* ColorTests.swift */; };
+		8C0FB96028EC6B5F00F530CA /* IconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0FB95F28EC6B5F00F530CA /* IconTests.swift */; };
+		8C0FB96228EC70E900F530CA /* FormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0FB96128EC70E900F530CA /* FormatterTests.swift */; };
+		8C0FB96928ECB17900F530CA /* StatementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0FB96828ECB17900F530CA /* StatementTests.swift */; };
 		8C175CD6289C4BAE00C4625B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C175CD5289C4BAE00C4625B /* Coordinator.swift */; };
 		8C175CD8289C4C4800C4625B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C175CD7289C4C4800C4625B /* AppCoordinator.swift */; };
 		8C175CDA289C4EC400C4625B /* StatementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C175CD9289C4EC400C4625B /* StatementCoordinator.swift */; };
@@ -38,7 +42,22 @@
 		8CF18967289F270100F8D938 /* Statements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF18966289F270100F8D938 /* Statements.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8C0FB95728EC638800F530CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C9287C02899FA9800E9C696 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C9287C72899FA9800E9C696;
+			remoteInfo = Desafio_Somosphi;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		8C0FB95328EC638800F530CA /* Desafio_SomosphiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Desafio_SomosphiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C0FB95D28EC645900F530CA /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
+		8C0FB95F28EC6B5F00F530CA /* IconTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTests.swift; sourceTree = "<group>"; };
+		8C0FB96128EC70E900F530CA /* FormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterTests.swift; sourceTree = "<group>"; };
+		8C0FB96828ECB17900F530CA /* StatementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementTests.swift; sourceTree = "<group>"; };
 		8C175CD5289C4BAE00C4625B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8C175CD7289C4C4800C4625B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8C175CD9289C4EC400C4625B /* StatementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementCoordinator.swift; sourceTree = "<group>"; };
@@ -73,6 +92,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8C0FB95028EC638800F530CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C9287C52899FA9800E9C696 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,6 +109,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C0FB95428EC638800F530CA /* Desafio_SomosphiTests */ = {
+			isa = PBXGroup;
+			children = (
+				8C0FB96328EC711600F530CA /* Misc */,
+				8C0FB96A28ECB19000F530CA /* Model */,
+				8C0FB95C28EC640500F530CA /* Define */,
+			);
+			path = Desafio_SomosphiTests;
+			sourceTree = "<group>";
+		};
+		8C0FB95C28EC640500F530CA /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				8C0FB95D28EC645900F530CA /* ColorTests.swift */,
+				8C0FB95F28EC6B5F00F530CA /* IconTests.swift */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		8C0FB96328EC711600F530CA /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				8C0FB96128EC70E900F530CA /* FormatterTests.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		8C0FB96A28ECB19000F530CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C0FB96828ECB17900F530CA /* StatementTests.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8C175CD4289C4B9300C4625B /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				8C9287CA2899FA9800E9C696 /* Desafio_Somosphi */,
+				8C0FB95428EC638800F530CA /* Desafio_SomosphiTests */,
 				8C9287C92899FA9800E9C696 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				8C9287C82899FA9800E9C696 /* Desafio_Somosphi.app */,
+				8C0FB95328EC638800F530CA /* Desafio_SomosphiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -203,6 +266,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8C0FB95228EC638800F530CA /* Desafio_SomosphiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C0FB95B28EC638800F530CA /* Build configuration list for PBXNativeTarget "Desafio_SomosphiTests" */;
+			buildPhases = (
+				8C0FB94F28EC638800F530CA /* Sources */,
+				8C0FB95028EC638800F530CA /* Frameworks */,
+				8C0FB95128EC638800F530CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C0FB95828EC638800F530CA /* PBXTargetDependency */,
+			);
+			name = Desafio_SomosphiTests;
+			productName = Desafio_SomosphiTests;
+			productReference = 8C0FB95328EC638800F530CA /* Desafio_SomosphiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8C9287C72899FA9800E9C696 /* Desafio_Somosphi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C9287DC2899FA9A00E9C696 /* Build configuration list for PBXNativeTarget "Desafio_Somosphi" */;
@@ -228,9 +309,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					8C0FB95228EC638800F530CA = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 8C9287C72899FA9800E9C696;
+					};
 					8C9287C72899FA9800E9C696 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -250,11 +335,19 @@
 			projectRoot = "";
 			targets = (
 				8C9287C72899FA9800E9C696 /* Desafio_Somosphi */,
+				8C0FB95228EC638800F530CA /* Desafio_SomosphiTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8C0FB95128EC638800F530CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C9287C62899FA9800E9C696 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,6 +382,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8C0FB94F28EC638800F530CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C0FB96228EC70E900F530CA /* FormatterTests.swift in Sources */,
+				8C0FB96028EC6B5F00F530CA /* IconTests.swift in Sources */,
+				8C0FB95E28EC645900F530CA /* ColorTests.swift in Sources */,
+				8C0FB96928ECB17900F530CA /* StatementTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C9287C42899FA9800E9C696 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +427,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8C0FB95828EC638800F530CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C9287C72899FA9800E9C696 /* Desafio_Somosphi */;
+			targetProxy = 8C0FB95728EC638800F530CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		8C9287D12899FA9800E9C696 /* StatementStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -343,6 +455,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8C0FB95928EC638800F530CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5AN4GAV8W4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sucris.Desafio-SomosphiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Desafio_Somosphi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Desafio_Somosphi";
+			};
+			name = Debug;
+		};
+		8C0FB95A28EC638800F530CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5AN4GAV8W4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sucris.Desafio-SomosphiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Desafio_Somosphi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Desafio_Somosphi";
+			};
+			name = Release;
+		};
 		8C9287DA2899FA9A00E9C696 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -520,6 +672,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8C0FB95B28EC638800F530CA /* Build configuration list for PBXNativeTarget "Desafio_SomosphiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C0FB95928EC638800F530CA /* Debug */,
+				8C0FB95A28EC638800F530CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8C9287C32899FA9800E9C696 /* Build configuration list for PBXProject "Desafio_Somosphi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

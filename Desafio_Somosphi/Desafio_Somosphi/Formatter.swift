@@ -27,6 +27,7 @@ struct Formatter {
     static func getDate(from value: String, using format: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        formatter.timeZone = TimeZone(identifier: "UTC")
         return formatter.date(from: value)
     }
 
@@ -37,6 +38,7 @@ struct Formatter {
 
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        formatter.timeZone = TimeZone(identifier: "UTC")
         return formatter.string(from: value)
     }
 
