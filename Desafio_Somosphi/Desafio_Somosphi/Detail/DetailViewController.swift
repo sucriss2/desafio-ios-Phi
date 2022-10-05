@@ -117,4 +117,8 @@ extension DetailViewController: DetailModelDelegate {
         }
     }
 
+    func didShowError(message: String) {
+        print(message)
+    }
+
 }

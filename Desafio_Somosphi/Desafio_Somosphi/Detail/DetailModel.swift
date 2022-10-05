@@ -9,6 +9,7 @@ import Foundation
 
 protocol DetailModelDelegate: AnyObject {
     func didUpShowDetail()
+    func didShowError(message: String)
 }
 
 class DetailModel {
@@ -30,7 +31,7 @@ class DetailModel {
                 self?.delegate?.didUpShowDetail()
             },
             onError: { error in
-                print(error.localizedDescription)
+                self.delegate?.didShowError(message: error.localizedDescription)
             })
     }
 
