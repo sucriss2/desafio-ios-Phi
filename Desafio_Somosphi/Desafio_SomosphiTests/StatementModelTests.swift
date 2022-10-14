@@ -20,7 +20,10 @@ final class StatementModelTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        mockedService = nil
+        viewControllerSpy = nil
+        userDefaultsMock = nil
     }
 
     func test_changeAmountVisibility_shouldChangeIsAmountVisible () throws {
@@ -44,6 +47,24 @@ final class StatementModelTests: XCTestCase {
         sut.changeAmountVisibility()
 
         XCTAssertEqual(viewControllerSpy.didUpdateBalanceCount, 1)
+    }
+
+    func test_formattedAmount_returnString() throws {
+        userDefaultsMock = UserDefaultsMock()
+        sut = StatementModel(userDefaults: userDefaultsMock)
+
+        sut.changeAmountVisibility()
+        XCTAssertEqual(sut.formattedAmount, "R$ 0,00")
+
+        sut.changeAmountVisibility()
+        XCTAssertEqual(sut.formattedAmount, "––––––")
+    }
+
+    func test_canShowLoading_returnHasMorePage() throws {
+        userDefaultsMock = UserDefaultsMock()
+        sut = StatementModel(userDefaults: userDefaultsMock)
+
+        XCTAssertTrue(sut.canShowLoading)
     }
 
 }
