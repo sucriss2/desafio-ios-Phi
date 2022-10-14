@@ -10,15 +10,16 @@ import UIKit
 protocol StatementModelDelegate: AnyObject {
     func didUpdateStatement()
     func didUpdateBalance()
-    func didErrorRepositories()
+    func didErrorRepositories(message: String)
 }
 
 class StatementModel {
     // MARK: - Internal Properties
     weak var delegate: StatementModelDelegate?
-    var service: AmountService?
+    var serviceAmount: AmountService?
     var serviceStatement: StatementService?
     private(set) var statements: [Statement]
+    private var userDefaults: UserDefaults
 
     var formattedAmount: String {
         if isAmountVisible {
@@ -33,10 +34,10 @@ class StatementModel {
 
     private(set) var isAmountVisible: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "visibleAmount")
+            return userDefaults.bool(forKey: "visibleAmount")
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: "visibleAmount")
+            userDefaults.setValue(newValue, forKey: "visibleAmount")
         }
     }
 
@@ -45,8 +46,9 @@ class StatementModel {
     private var page: Int = 0
     private var hasMorePages = true
 
-    init() {
+    init(userDefaults: UserDefaults = UserDefaults.standard) {
         statements = []
+        self.userDefaults = userDefaults
     }
 
     // MARK: - Internal Methods
@@ -56,7 +58,7 @@ class StatementModel {
             return
         }
 
-        service?.fecthAmount(
+        serviceAmount?.fecthAmount(
             onComplete: { result in
                 self.amount = result.amount
                 self.delegate?.didUpdateBalance()
@@ -82,8 +84,7 @@ class StatementModel {
                 }
             },
             onError: { error in
-                self.delegate?.didErrorRepositories()
-                print(error.localizedDescription)
+                self.delegate?.didErrorRepositories(message: error.localizedDescription)
             })
     }
 

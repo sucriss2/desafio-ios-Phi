@@ -37,7 +37,7 @@ class StatementCoordinator: Coordinator {
         }
 
         model.serviceStatement = serviceStatement
-        model.service = service
+        model.serviceAmount = service
         model.delegate = viewController
         viewController.model = model
         viewController.delegate = self

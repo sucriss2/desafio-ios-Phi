@@ -23,7 +23,6 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         erase()
-        model?.service = DetailService()
         model?.loadDetail()
     }
 

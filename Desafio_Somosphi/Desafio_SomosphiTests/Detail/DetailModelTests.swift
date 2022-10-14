@@ -39,6 +39,8 @@ final class DetailModelTests: XCTestCase {
         XCTAssertEqual(statement.authentication, "")
         XCTAssertEqual(statement.tType, "TRANSFEROUT")
         XCTAssertNil(statement.from)
+
+        XCTAssertEqual(mockedService?.fetchDetailCount, 1)
     }
 
     func test_loadDetail_whenError_returnsError() throws {
@@ -50,6 +52,8 @@ final class DetailModelTests: XCTestCase {
             viewControllerSpy?.message,
             "The operation couldn’t be completed. (Desafio_SomosphiTests.TestGenericError error 0.)"
         )
+
+        XCTAssertEqual(mockedService?.fetchDetailCount, 1)
     }
 
     // MARK: Helpers
@@ -73,6 +77,7 @@ final class DetailModelTests: XCTestCase {
 }
 
 class DetailServiceMock: DetailService {
+    private(set) var fetchDetailCount = 0
     let statement: Statement?
     let error: Error?
 
@@ -86,12 +91,10 @@ class DetailServiceMock: DetailService {
         onComplete: @escaping (Statement) -> Void,
         onError: @escaping (Error) -> Void
     ) {
-
+        fetchDetailCount += 1
         if let statement = statement {
             onComplete(statement)
-            print(" =====>>> SUCESSOOO <<<===== ")
         } else if let error = error {
-            print("++++ ERROOOO +++++++ ")
             onError(error)
         }
 

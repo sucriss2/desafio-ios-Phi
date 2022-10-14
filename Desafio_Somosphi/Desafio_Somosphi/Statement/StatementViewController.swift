@@ -125,8 +125,8 @@ extension StatementViewController: StatementModelDelegate {
         }
     }
 
-    func didErrorRepositories() {
-        print("E R R O R ! ! ! ! !")
+    func didErrorRepositories(message: String) {
+        print(message)
     }
 
 }
