@@ -3,7 +3,7 @@
 //  Desafio_SomosphiTests
 //
 //  Created by Suh on 07/10/22.
-//
+// swiftlint:disable line_length
 
 import XCTest
 @testable import Desafio_Somosphi
@@ -14,6 +14,7 @@ final class StatementModelTests: XCTestCase {
     var mockedService: StatementServiceMock!
     var viewControllerSpy: StatementVCSpy!
     var userDefaultsMock: UserDefaultsMock!
+    var amountServiceMock: AmountServiceMock!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -67,12 +68,31 @@ final class StatementModelTests: XCTestCase {
         XCTAssertTrue(sut.canShowLoading)
     }
 
+    func test_fetchStatement_whenHasMorePages_returnTrue() throws {
+        userDefaultsMock = UserDefaultsMock()
+        sut = StatementModel(userDefaults: userDefaultsMock)
+        mockedService = StatementServiceMock(statements: Statements(items: [.fixture()]), page: 1, error: nil)
+        sut.serviceStatement = mockedService
+
+        sut.fetchStatement()
+
+        XCTAssertFalse(sut.statements.isEmpty)
+
+        mockedService.getEmptyStatements()
+        mockedService.statements!.items = []
+
+        print("===== \(mockedService.statements!.items) =====")
+        sut.fetchStatement()
+        XCTAssertTrue(mockedService.statements!.items.isEmpty)
+
+    }
+
 }
 
 class StatementServiceMock: StatementService {
     private(set) var fetchStatementCount: Int = 0
     let page: Int
-    let statements: Statements?
+    var statements: Statements?
     let error: Error?
 
     init(statements: Statements?, page: Int, error: Error?) {
@@ -96,6 +116,11 @@ class StatementServiceMock: StatementService {
         print("=====>> PASSOU AQUI")
 
     }
+
+    func getEmptyStatements() {
+        statements = Statements(items: [])
+    }
+
 }
 
 class StatementVCSpy: StatementModelDelegate {
@@ -164,4 +189,8 @@ class UserDefaultsMock: UserDefaults {
 
     }
 
+}
+
+enum TestGenericError2: Error {
+    case generic
 }
