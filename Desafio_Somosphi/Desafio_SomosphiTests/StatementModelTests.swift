@@ -3,7 +3,6 @@
 //  Desafio_SomosphiTests
 //
 //  Created by Suh on 07/10/22.
-// swiftlint:disable line_length
 
 import XCTest
 @testable import Desafio_Somosphi
@@ -68,23 +67,62 @@ final class StatementModelTests: XCTestCase {
         XCTAssertTrue(sut.canShowLoading)
     }
 
-    func test_fetchStatement_whenHasMorePages_returnTrue() throws {
+    func test_fetchStatement_whenHasMorePages_returnFalse() throws {
         userDefaultsMock = UserDefaultsMock()
         sut = StatementModel(userDefaults: userDefaultsMock)
-        mockedService = StatementServiceMock(statements: Statements(items: [.fixture()]), page: 1, error: nil)
+        mockedService = StatementServiceMock(statements: Statements(items: [.fixture()]), page: 0, error: nil)
         sut.serviceStatement = mockedService
 
-        sut.fetchStatement()
-
-        XCTAssertFalse(sut.statements.isEmpty)
-
         mockedService.getEmptyStatements()
-        mockedService.statements!.items = []
-
-        print("===== \(mockedService.statements!.items) =====")
         sut.fetchStatement()
         XCTAssertTrue(mockedService.statements!.items.isEmpty)
 
+    }
+
+    func test_fetchStatement_whenServiceStatement_returnError() throws {
+        userDefaultsMock = UserDefaultsMock()
+        sut = StatementModel(userDefaults: userDefaultsMock)
+        mockedService = StatementServiceMock(
+            statements: nil, page: 0, error: TestGenericError.generic)
+        viewControllerSpy = StatementVCSpy()
+        sut.delegate = viewControllerSpy
+
+        sut.serviceStatement = mockedService
+        sut.fetchStatement()
+
+        XCTAssertEqual(
+            viewControllerSpy!.message,
+            ("The operation couldn’t be completed. (Desafio_SomosphiTests.TestGenericError error 0.)") )
+    }
+
+    func test_fetchStatement_whenServiceStatement_returnOnSucces() throws {
+        userDefaultsMock = UserDefaultsMock()
+        sut = StatementModel(userDefaults: userDefaultsMock)
+        mockedService = StatementServiceMock(statements: Statements(items: [.fixture()]), page: 0, error: nil)
+        sut.serviceStatement = mockedService
+        sut.fetchStatement()
+
+        XCTAssertEqual(mockedService.fetchStatementCount, 1)
+    }
+
+    func test_fetchStatement_whenServiceAmount_returnSucess() throws {
+        userDefaultsMock = UserDefaultsMock()
+        sut = StatementModel(userDefaults: userDefaultsMock)
+        amountServiceMock = AmountServiceMock(amount: Amount(amount: 1234), error: nil)
+        sut.serviceAmount = amountServiceMock
+        sut.fetchStatement()
+
+        XCTAssertEqual(amountServiceMock.fetchStatementAmountCount, 1)
+    }
+
+    func test_fetchStatement_whenServiceAmount_returnError() throws {
+        userDefaultsMock = UserDefaultsMock()
+        sut = StatementModel(userDefaults: userDefaultsMock)
+        amountServiceMock = AmountServiceMock(amount: nil, error: TestGenericError2.generic)
+        sut.serviceAmount = amountServiceMock
+        sut.fetchStatement()
+
+        XCTAssertNil(amountServiceMock.amount)
     }
 
 }
@@ -130,12 +168,11 @@ class StatementVCSpy: StatementModelDelegate {
     private(set) var statements: [Statement] = []
 
     func didUpdateStatement() {
-        print("++++sucessoooo")
+        print("++++ sucessoooo ++++")
     }
 
     func didUpdateBalance() {
         didUpdateBalanceCount += 1
-        print("==== BALANCE ====")
     }
 
     func didErrorRepositories(message: String) {
@@ -146,11 +183,11 @@ class StatementVCSpy: StatementModelDelegate {
 
 class AmountServiceMock: AmountService {
 
-    private(set) var fetchStatementCount: Int = 0
+    private(set) var fetchStatementAmountCount: Int = 0
     let error: Error?
     let amount: Amount?
 
-    init(amount: Amount, error: Error) {
+    init(amount: Amount?, error: Error?) {
         self.amount = amount
         self.error = error
     }
@@ -160,7 +197,7 @@ class AmountServiceMock: AmountService {
         onError: @escaping (Error) -> Void
     ) {
 
-        fetchStatementCount += 1
+        fetchStatementAmountCount += 1
         if let error = error {
             onError(error)
         } else if let amount = amount {
