@@ -53,7 +53,7 @@ class StatementViewController: UIViewController {
 
 }
 
-extension StatementViewController: UITableViewDataSource {
+extension StatementViewController: UITableViewDataSource { // fonte de dados.
     func numberOfSections(in tableView: UITableView) -> Int {
         if canShowLoading {
             return 2
