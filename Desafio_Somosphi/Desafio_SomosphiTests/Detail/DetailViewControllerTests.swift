@@ -95,9 +95,8 @@ final class DetailViewControllerTests: XCTestCase {
         mockedModel?.delegate = sut
         _ = sut.view
 
-        print("<< << >> >>")
-
-        XCTAssertEqual(sut.valueLabel.text, "")
+        sut.valueLabel.text = "1234"
+        XCTAssertEqual(sut.valueLabel.text, "1234")
     }
 
 }

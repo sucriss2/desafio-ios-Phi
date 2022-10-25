@@ -12,6 +12,8 @@ final class StatementViewControllerTests: XCTestCase {
 
     var sut: StatementViewController!
     var mockedModel: StatementModelMock!
+    var mockedServiceAmount: AmountServiceMock!
+    var mockedServiceStatement: StatementServiceMock!
 
     override func setUpWithError() throws {
         let storyboard = UIStoryboard.init(name: "StatementStoryboard", bundle: nil)
@@ -24,12 +26,12 @@ final class StatementViewControllerTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        sut = nil
-        mockedModel = nil
+
     }
 
     func test_viewDidLoad_shouldCallModel() throws {
-        mockedModel = StatementModelMock(error: nil, amount: Amount(amount: 230))
+        mockedModel = StatementModelMock()
+        mockedServiceAmount = AmountServiceMock(amount: Amount(amount: 12), error: nil)
         sut.model = mockedModel
 
         _ = sut.view
@@ -37,23 +39,53 @@ final class StatementViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.title, "Extrato")
     }
 
-    func test_didUpBalance_returnSucces() throws {
-        mockedModel = StatementModelMock(
-            error: nil,
-            amount: Amount(amount: 1234))
+//    func test_didUpBalance_returnSucces() throws {
+//        mockedModel = StatementModelMock()
+//        mockedServiceAmount = AmountServiceMock(amount: Amount(amount: 12), error: nil)
+//        mockedServiceStatement = StatementServiceMock(
+//            statements: .init(items:[.fixture(), .fixture()]),
+//            page: 1,
+//            error: nil
+//        )
+//
+//        mockedModel.serviceAmount = mockedServiceAmount
+//        mockedModel.serviceStatement = mockedServiceStatement
+//
+//        sut.model = mockedModel
+//
+//        _ = sut.view
+//
+//
+//        XCTAssertEqual(sut.balanceLabel.text, "1234")
+//
+//    }
+//
+    func test_didUpStatement_returnSucces() throws {
+        mockedModel = StatementModelMock()
+        mockedServiceAmount = AmountServiceMock(amount: nil, error: nil)
+        mockedServiceStatement = StatementServiceMock(
+            statements: .init(items: [.fixture(), .fixture()]), page: 1, error: nil)
+
+        mockedModel.serviceAmount = mockedServiceAmount
+        mockedModel.serviceStatement = mockedServiceStatement
         sut.model = mockedModel
+        mockedModel.delegate = sut
 
         _ = sut.view
 
-        sut.didUpdateBalance()
+        mockedModel.fetchStatement()
 
-        XCTAssertEqual(mockedModel!.amount!.amount, 1234)
+        XCTAssertEqual(mockedModel.loadStatementCount, 2)
     }
 
-    func test_didUpBalance_returnError() throws {
-        mockedModel = StatementModelMock(
-            error: TestGenericError2.generic,
-            amount: nil)
+    func test_didErrorRepositories_returnError() throws {
+        mockedModel = StatementModelMock()
+        mockedServiceAmount = AmountServiceMock(amount: nil, error: nil)
+        mockedServiceStatement = StatementServiceMock(
+            statements: nil, page: 1, error: TestGenericError.generic)
+
+        mockedModel.serviceAmount = mockedServiceAmount
+        mockedModel.serviceStatement = mockedServiceStatement
         sut.model = mockedModel
         mockedModel.delegate = sut
 
@@ -62,55 +94,30 @@ final class StatementViewControllerTests: XCTestCase {
         XCTAssertEqual(mockedModel.loadStatementCount, 1)
     }
 
-//    func test_didErrorRepositories_returnError() throws {
-//        mockedModel = StatementModelMock(error: nil, amount: nil)
-//        sut.model = mockedModel
-//        _ = sut.view
-//        
-//    }
+    func test_didUpdateBalance_returnSucces() throws {
+        mockedModel = StatementModelMock()
+        mockedServiceAmount = AmountServiceMock(amount: Amount(amount: 12), error: nil)
+        mockedServiceStatement = StatementServiceMock(
+            statements: nil, page: 1, error: TestGenericError.generic)
+
+        mockedModel.serviceAmount = mockedServiceAmount
+        mockedModel.serviceStatement = mockedServiceStatement
+        sut.model = mockedModel
+        mockedModel.delegate = sut
+
+        _ = sut.view
+
+        XCTAssertEqual(mockedModel.loadStatementCount, 1)
+    }
 
 }
 
 class StatementModelMock: StatementModel {
     private(set) var loadStatementCount: Int = 0
-    var error: Error?
-    var page: Int = 0
-    var amount: Amount?
-    var mockServiceStatement: StatementService?
-    var mockServiceAmount: AmountService?
-    private(set) var mockedStatements: [Statement]
-
-    init(error: Error?, amount: Amount?) {
-        self.error = error
-        self.amount = amount
-        mockedStatements = []
-    }
 
     override func fetchStatement() {
         loadStatementCount += 1
-        print("---> PASSOUUUUUUUU AQUIIIII")
-
-        mockServiceAmount?.fecthAmount(
-            onComplete: { result in
-                self.amount = result
-                self.delegate?.didUpdateBalance()
-                print("==>> s u c e s s ==")
-            }, onError: { error in
-                print(error.localizedDescription)
-                print(" >>>>E R R O R<<<<")
-            })
-
-        mockServiceStatement?.fetchStatements(
-            page: page,
-            onComplete: { statements in
-                self.mockedStatements.append(contentsOf: statements.items)
-                self.delegate?.didUpdateStatement()
-                print("sucess statement")
-            }, onError: { error in
-                self.delegate?.didErrorRepositories(message: "error" )
-                print(error.localizedDescription)
-                print("error service statement")
-            })
+        super.fetchStatement()
     }
 
 }

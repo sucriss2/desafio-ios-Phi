@@ -117,6 +117,7 @@ extension StatementViewController: StatementModelDelegate {
             }
             selfRef.updateAmount()
         }
+        print("-->> =(^;^)= <<--")
     }
 
     func didUpdateStatement() {
