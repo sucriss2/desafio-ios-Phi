@@ -78,9 +78,27 @@ final class DetailViewControllerTests: XCTestCase {
         XCTAssertNotNil(image)
     }
 
-//    func test_didUpShowDetail() throws {
-//
-//    }
+    func test_didUpShowDetail_returnError() throws {
+        mockedModel = DetailModelMock(statement: nil, error: TestGenericError.generic)
+        sut.model = mockedModel
+        mockedModel?.delegate = sut
+        _ = sut.view
+
+        XCTAssertEqual(
+            mockedModel?.error?.localizedDescription,
+            "The operation couldn’t be completed. (Desafio_SomosphiTests.TestGenericError error 0.)")
+    }
+
+    func test_didUpShowDetail_returnSuccess() throws {
+        mockedModel = DetailModelMock(statement: .fixture(), error: nil)
+        sut.model = mockedModel
+        mockedModel?.delegate = sut
+        _ = sut.view
+
+        print("<< << >> >>")
+
+        XCTAssertEqual(sut.valueLabel.text, "")
+    }
 
 }
 
@@ -103,8 +121,10 @@ class DetailModelMock: DetailModel {
         loadDetailCount += 1
         if mockedStatement != nil {
             self.delegate?.didUpShowDetail()
+            print("===>>> did_show_detail")
         } else if error != nil {
             self.delegate?.didShowError(message: "Errooo")
+            print("--->>  E R R O R <<---")
         }
 
     }

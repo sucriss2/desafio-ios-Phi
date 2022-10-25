@@ -40,9 +40,7 @@ final class StatementViewControllerTests: XCTestCase {
     func test_didUpBalance_returnSucces() throws {
         mockedModel = StatementModelMock(
             error: nil,
-            amount: Amount(amount: 1234),
-            mockedStatements: [Statement.fixture()]
-        )
+            amount: Amount(amount: 1234))
         sut.model = mockedModel
 
         _ = sut.view
@@ -55,17 +53,21 @@ final class StatementViewControllerTests: XCTestCase {
     func test_didUpBalance_returnError() throws {
         mockedModel = StatementModelMock(
             error: TestGenericError2.generic,
-            amount: nil,
-            mockedStatements: [Statement.fixture()]
-        )
+            amount: nil)
         sut.model = mockedModel
         mockedModel.delegate = sut
 
         _ = sut.view
 
         XCTAssertEqual(mockedModel.loadStatementCount, 1)
-
     }
+
+//    func test_didErrorRepositories_returnError() throws {
+//        mockedModel = StatementModelMock(error: nil, amount: nil)
+//        sut.model = mockedModel
+//        _ = sut.view
+//        
+//    }
 
 }
 
@@ -76,16 +78,12 @@ class StatementModelMock: StatementModel {
     var amount: Amount?
     var mockServiceStatement: StatementService?
     var mockServiceAmount: AmountService?
-    var mockedStatements: [Statement]?
+    private(set) var mockedStatements: [Statement]
 
-    override var statements: [Statement] {
-        return mockedStatements ?? []
-    }
-
-    init(error: Error?, amount: Amount?, mockedStatements: [Statement]? ) {
+    init(error: Error?, amount: Amount?) {
         self.error = error
         self.amount = amount
-        self.mockedStatements = mockedStatements
+        mockedStatements = []
     }
 
     override func fetchStatement() {
@@ -104,7 +102,8 @@ class StatementModelMock: StatementModel {
 
         mockServiceStatement?.fetchStatements(
             page: page,
-            onComplete: { statments in
+            onComplete: { statements in
+                self.mockedStatements.append(contentsOf: statements.items)
                 self.delegate?.didUpdateStatement()
                 print("sucess statement")
             }, onError: { error in
@@ -113,6 +112,5 @@ class StatementModelMock: StatementModel {
                 print("error service statement")
             })
     }
-
 
 }
