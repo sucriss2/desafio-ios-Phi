@@ -28,7 +28,6 @@ class Network {
     ) {
 
         guard let url = URL(string: request.baseURL + request.path) else { return }
-        print(url.absoluteString)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
 
@@ -38,7 +37,6 @@ class Network {
 
         let datatask = session.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
-                print(error.localizedDescription)
                 onComplete(.failure(error))
                 return
             }

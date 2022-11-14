@@ -14,12 +14,10 @@ protocol StatementModelDelegate: AnyObject {
 }
 
 class StatementModel {
-    // MARK: - Internal Properties
+
     weak var delegate: StatementModelDelegate?
     var serviceAmount: AmountService?
     var serviceStatement: StatementService?
-    private(set) var statements: [Statement]
-    private var userDefaults: UserDefaults
 
     var formattedAmount: String {
         if isAmountVisible {
@@ -41,7 +39,8 @@ class StatementModel {
         }
     }
 
-    // MARK: - Private properties
+    private(set) var statements: [Statement]
+    private var userDefaults: UserDefaults
     private var amount: Int = 0
     private var page: Int = 0
     private var hasMorePages = true
@@ -50,8 +49,6 @@ class StatementModel {
         statements = []
         self.userDefaults = userDefaults
     }
-
-    // MARK: - Internal Methods
 
     func fetchStatement() {
         guard hasMorePages else {

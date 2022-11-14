@@ -17,7 +17,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var authenticationLabel: UILabel!
     @IBOutlet weak var descriptionTargetLabel: UILabel!
 
-    weak var coordinator: DetailCoordinator?
     var model: DetailModel?
 
     override func viewDidLoad() {
@@ -41,7 +40,6 @@ class DetailViewController: UIViewController {
         dateHourLabel.text = ""
     }
 
-    // Transformando a view wm imagem
     func takeDetailStatement() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(view.frame.size, view.isOpaque, 1.0)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -81,7 +79,7 @@ class DetailViewController: UIViewController {
             return nil
         }
     }
-    // O método de mensagem de erro.
+
     private func showErrorShare() {
         DispatchQueue.main.async {
             let alert = UIAlertController(

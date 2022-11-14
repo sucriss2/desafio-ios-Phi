@@ -17,7 +17,6 @@ class StatementViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var showAmountButton: UIButton!
 
-    weak var coordinator: StatementCoordinator?
     weak var delegate: StatementViewControllerDelegate?
 
     var model: StatementModel?
@@ -117,7 +116,6 @@ extension StatementViewController: StatementModelDelegate {
             }
             selfRef.updateAmount()
         }
-        print("-->> =(^;^)= <<--")
     }
 
     func didUpdateStatement() {

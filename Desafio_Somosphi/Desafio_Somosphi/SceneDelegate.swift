@@ -10,7 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var coordinator: AppCoordinator?
-    var window: UIWindow?
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,

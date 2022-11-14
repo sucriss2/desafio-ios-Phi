@@ -16,10 +16,6 @@ class StatementCoordinator: Coordinator {
         self.navigationController = navigationController
     }
 
-    deinit {
-        print("testeeeee")
-    }
-
     func start() {
         let statementVC = makeStatementViewController()
         navigationController.pushViewController(statementVC, animated: true)
